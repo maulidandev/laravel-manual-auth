@@ -25,4 +25,11 @@ class LogoutControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route("login"));
     }
+
+    public function test_logout_if_user_not_login(){
+        $response = $this->post(route("logout"));
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route("login"));
+    }
 }

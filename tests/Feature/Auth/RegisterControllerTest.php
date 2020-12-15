@@ -20,6 +20,14 @@ class RegisterControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_access_register_page_if_user_login(){
+        $user = User::factory()->create();
+        $response = $this->actingAs($user)->get(route("register"));
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route("home"));
+    }
+
     /**
      * @test
      */

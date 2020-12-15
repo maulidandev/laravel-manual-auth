@@ -30,6 +30,15 @@ class LoginControllerTest extends TestCase
         $response->assertRedirect(route("home"));
     }
 
+    public function test_access_login_page_if_user_already_login(){
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route("login"));
+
+        $response->assertStatus(302);
+        $response->assertRedirect(route("home"));
+    }
+
     /**
      * @param $error
      * @param $data
